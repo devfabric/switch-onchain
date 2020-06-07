@@ -1,0 +1,14 @@
+port = 8870
+address = "0.0.0.0"
+midware = 1
+readtimeout = 30
+writetimeout = 30
+
+[tls]
+  enabled = false
+  certfile = "app_client.pem"
+  keyfile = "app_client.key"
+  cacert = "app_ca.pem"
+
+[cache]
+  cacheType = "db"

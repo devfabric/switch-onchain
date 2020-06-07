@@ -1,0 +1,47 @@
+配置文件说名：
+
+1> 数据库配置dao.toml
+Type 采用的数据库，目前仅支持mysql
+DataSource 数据源配置
+MaxIdle 连接池最大空闲链接
+MaxOpen  连接池最大链接
+IsLoger 是否打印执行日志
+[TLS] 数据库安全链接
+  Enabled 是否启动数据库安全链接 目前不支持安全链接
+
+2> rest接口服务配置http.toml
+port服务接口
+address服务笛子
+midware 1表示启用http状态日志  0表示不启用
+readtimeout 读超时时间
+writetimeout 写超时时间
+[tls] 安全链接
+  enabled false不启用安全链接   目前不支持安全链接
+[cache]
+  cacheType = "off" 接口是否启用db缓存，off为不启用 db为启用db缓存
+
+3> 日志管理器logger.toml
+PrintLog 是否启用终端打印日志 false为不启用，则写入文件
+IsDebug 是否启用debug日志
+DataDir 日志文件存放目录
+MaxAge 日志文件最大存在时间
+RotationTime 多少小时切换日志写入新文件
+
+4> 记录even事件区块高度 blockInfo
+{"height":0}  初始为0， 需要持久化保存
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

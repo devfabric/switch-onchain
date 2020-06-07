@@ -1,0 +1,591 @@
+basePath: '{{.BasePath}}'
+definitions:
+  model.AccResReq:
+    properties:
+      address:
+        description: 机构地址  被授权者地址
+        example: accaddr
+        type: string
+      auth:
+        description: 需要验证的资源权限
+        example: 2
+        type: integer
+      domain:
+        description: 数据域
+        example: catalog
+        type: string
+      resid:
+        description: 资源ID
+        example:
+        - "123456"
+        items:
+          type: string
+        type: array
+      restype:
+        description: 资源类型
+        example: data
+        type: string
+    type: object
+  model.DeleteAsset:
+    properties:
+      domain:
+        description: 数据域
+        example: catalog
+        type: string
+      ownaddr:
+        description: 资源的归属者
+        example: ownaddr
+        type: string
+      reslist:
+        description: 资源列表
+        items:
+          $ref: '#/definitions/model.ResList'
+        type: array
+    type: object
+  model.GrantAccRes:
+    properties:
+      accaddr:
+        description: 被授权者地址
+        example: accaddr
+        type: string
+      auth:
+        description: 访问权-使用权
+        example: 6
+        type: integer
+      resids:
+        description: 资源ID列表
+        example:
+        - "123456"
+        items:
+          type: string
+        type: array
+      restype:
+        description: 资源类型
+        example: data
+        type: string
+    type: object
+  model.GrantAsset:
+    properties:
+      accreslist:
+        description: 被授权机构资源信息
+        items:
+          $ref: '#/definitions/model.GrantAccRes'
+        type: array
+      domain:
+        description: 数据域
+        example: catalog
+        type: string
+      ownaddr:
+        description: 授权机构地址  资源归属者地址
+        example: ownaddr
+        type: string
+    type: object
+  model.QueryGrant:
+    properties:
+      address:
+        description: 机构地址  资源归属者地址
+        example: ownaddr
+        type: string
+      domain:
+        description: 数据域
+        example: catalog
+        type: string
+      page:
+        description: 页面
+        example: 1
+        type: integer
+      pageSize:
+        description: 每页大小
+        example: 100
+        type: integer
+      resids:
+        description: 资源ID 可以不传递
+        example:
+        - "123456"
+        items:
+          type: string
+        type: array
+      restype:
+        description: 资源类型
+        example: data
+        type: string
+    type: object
+  model.QuerySelf:
+    properties:
+      address:
+        description: 机构地址  资源归属者地址
+        example: ownaddr
+        type: string
+      condition:
+        description: mine:查询自己的资源   granted:查询自己被授予的资源  mixed:以上两种混合查询
+        example: mixed
+        type: string
+      domain:
+        description: 数据域
+        example: catalog
+        type: string
+      page:
+        description: 页面
+        example: 1
+        type: integer
+      pageSize:
+        description: 每页大小
+        example: 100
+        type: integer
+      restype:
+        description: 资源类型
+        example: data
+        type: string
+    type: object
+  model.RegResInfo:
+    properties:
+      address:
+        description: 机构地址  资源归属者地址
+        example: ownaddr
+        type: string
+      domain:
+        description: 数据域
+        example: catalog
+        type: string
+      resid:
+        description: 资源ID
+        example: "123456"
+        type: string
+      restype:
+        description: 资源类型
+        example: data
+        type: string
+    type: object
+  model.ReqChkToken:
+    properties:
+      orgcode:
+        description: 业务机构id
+        example: "731221"
+        type: string
+      token:
+        description: token字符串
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+        type: string
+      username:
+        description: 机构用户名
+        example: client
+        type: string
+    type: object
+  model.ReqToken:
+    properties:
+      audience:
+        description: 请求发起者名称
+        example: switch-directory-chain
+        type: string
+      customkv:
+        description: token中可以设置自定义KV
+        type: object
+      expires:
+        description: token过期时间(单位秒) 默认一天
+        example: 86400
+        type: integer
+      isenc:
+        description: 请求数据是否加密 true:加密 false:不加密
+        example: false
+        type: boolean
+      userinfo:
+        description: 用户请求token数据
+        example: '{"username":"client","pwd":"12356","orgcode":"731221"}'
+        type: string
+    type: object
+  model.ResList:
+    properties:
+      resids:
+        example:
+        - "123456"
+        items:
+          type: string
+        type: array
+      restype:
+        example: data
+        type: string
+    type: object
+  model.RevokeAccRes:
+    properties:
+      accaddr:
+        description: 被授权者地址
+        example: accaddr
+        type: string
+      resids:
+        description: 资源ID列表
+        example:
+        - "123456"
+        items:
+          type: string
+        type: array
+      restype:
+        description: 资源类型
+        example: data
+        type: string
+    type: object
+  model.RevokeAsset:
+    properties:
+      accreslist:
+        description: 被授权机构资源信息
+        items:
+          $ref: '#/definitions/model.RevokeAccRes'
+        type: array
+      domain:
+        description: 数据域
+        example: catalog
+        type: string
+      ownaddr:
+        description: 授权机构地址 资源归属者地址
+        example: ownaddr
+        type: string
+    type: object
+  model.SyncResInfo:
+    properties:
+      accaddr:
+        description: 资源被授权机构地址
+        example: accaddr
+        type: string
+      auth:
+        description: 资源权限
+        example: 7
+        type: integer
+      domain:
+        description: 数据域
+        example: catalog
+        type: string
+      ownaddr:
+        description: 资源的归属机构地址
+        example: ownaddr
+        type: string
+      resid:
+        description: 资源ID
+        example: "123456"
+        type: string
+      restype:
+        description: 资源类型
+        example: data
+        type: string
+    type: object
+  model.UpdateAsset:
+    properties:
+      accreslist:
+        description: 被授权机构资源信息
+        items:
+          $ref: '#/definitions/model.GrantAccRes'
+        type: array
+      domain:
+        example: catalog
+        type: string
+      ownaddr:
+        description: 授权机构地址  被授权者地址
+        example: ownaddr
+        type: string
+    type: object
+  proto.Response:
+    properties:
+      code:
+        description: 返回0成功 其中Data为其返回数据； 其他失败
+        example: 0
+        type: integer
+      data:
+        type: object
+      message:
+        description: 成功"OK"； 失败为错误信息
+        example: OK
+        type: string
+      warn:
+        type: string
+    type: object
+host: '{{.Host}}'
+info:
+  contact: {}
+  description: '{{.Description}}'
+  license: {}
+  title: '{{.Title}}'
+  version: '{{.Version}}'
+paths:
+  /:
+    get:
+      description: 节点健康检查接口
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/proto.Response'
+            type: object
+      tags:
+      - Health
+  /api/v1/res/EnrollResAuthTest:
+    post:
+      consumes:
+      - application/json
+      description: 注册资源测试接口 禁止外部调用
+      parameters:
+      - description: token令牌
+        in: header
+        name: RAC_TOKEN
+        type: string
+      - description: 请求信息
+        in: body
+        name: regResInfo
+        required: true
+        schema:
+          $ref: '#/definitions/model.RegResInfo'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/proto.Response'
+            type: object
+      tags:
+      - Auth
+  /api/v1/res/deleteResAuth:
+    post:
+      consumes:
+      - application/json
+      description: 资源归属者删除权限
+      parameters:
+      - description: token令牌
+        in: header
+        name: RAC_TOKEN
+        type: string
+      - description: 请求信息
+        in: body
+        name: deleteResAuth
+        required: true
+        schema:
+          $ref: '#/definitions/model.DeleteAsset'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/proto.Response'
+            type: object
+      tags:
+      - Auth
+  /api/v1/res/enrollResAuth:
+    post:
+      consumes:
+      - application/json
+      description: 注册资源缓存添加接口
+      parameters:
+      - description: 请求信息
+        in: body
+        name: resAuth
+        required: true
+        schema:
+          $ref: '#/definitions/model.SyncResInfo'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/proto.Response'
+            type: object
+      tags:
+      - Auth
+  /api/v1/res/grantResAuth:
+    post:
+      consumes:
+      - application/json
+      description: 设置其他用户对资源的访问、使用权限
+      parameters:
+      - description: token令牌
+        in: header
+        name: RAC_TOKEN
+        type: string
+      - description: 请求信息
+        in: body
+        name: grantAsset
+        required: true
+        schema:
+          $ref: '#/definitions/model.GrantAsset'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/proto.Response'
+            type: object
+      tags:
+      - Auth
+  /api/v1/res/grantResAuthList:
+    post:
+      consumes:
+      - application/json
+      description: 资源归属者查询已授权列表
+      parameters:
+      - description: 请求信息
+        in: body
+        name: queryOther
+        required: true
+        schema:
+          $ref: '#/definitions/model.QueryGrant'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/proto.Response'
+            type: object
+      tags:
+      - Auth
+  /api/v1/res/revokeResAuth:
+    post:
+      consumes:
+      - application/json
+      description: 资源归属者回收已授权用户的权限
+      parameters:
+      - description: token令牌
+        in: header
+        name: RAC_TOKEN
+        type: string
+      - description: 请求信息
+        in: body
+        name: revokeAsset
+        required: true
+        schema:
+          $ref: '#/definitions/model.RevokeAsset'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/proto.Response'
+            type: object
+      tags:
+      - Auth
+  /api/v1/res/updateResAuth:
+    post:
+      consumes:
+      - application/json
+      description: 资源归属者更新已授权用户对资源访问、使用权限
+      parameters:
+      - description: token令牌
+        in: header
+        name: RAC_TOKEN
+        type: string
+      - description: 请求信息
+        in: body
+        name: updateAsset
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateAsset'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/proto.Response'
+            type: object
+      tags:
+      - Auth
+  /api/v1/res/userResAuthList:
+    post:
+      consumes:
+      - application/json
+      description: 用户查询归属的资源、被授权的资源、以及上面两种结果集合
+      parameters:
+      - description: 请求信息
+        in: body
+        name: querySelf
+        required: true
+        schema:
+          $ref: '#/definitions/model.QuerySelf'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/proto.Response'
+            type: object
+      tags:
+      - Auth
+  /api/v1/res/verify:
+    post:
+      consumes:
+      - application/json
+      description: 用户权限验证
+      parameters:
+      - description: 资源信息
+        in: body
+        name: AccResReq
+        schema:
+          $ref: '#/definitions/model.AccResReq'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":true,"msg":"OK"}'
+          schema:
+            type: string
+      tags:
+      - Auth
+  /token/v1/generate:
+    post:
+      consumes:
+      - application/json
+      description: 获取token字符串
+      parameters:
+      - description: 请求信息
+        in: body
+        name: reqToken
+        required: true
+        schema:
+          $ref: '#/definitions/model.ReqToken'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/proto.Response'
+            type: object
+      tags:
+      - Token
+  /token/v1/verify:
+    post:
+      consumes:
+      - application/json
+      description: 测试接口验证token
+      parameters:
+      - description: 请求信息
+        in: body
+        name: reqChkToken
+        required: true
+        schema:
+          $ref: '#/definitions/model.ReqChkToken'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/proto.Response'
+            type: object
+      tags:
+      - Token
+swagger: "2.0"

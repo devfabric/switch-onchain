@@ -1,0 +1,8 @@
+对外具体服务层
+
+供main调用
+
+目前提供三个服务：
+    fabric event事件服务
+    restful接口层
+    profiling go堆栈调试服务

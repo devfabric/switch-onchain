@@ -1,0 +1,35 @@
+测试
+
+1>
+commit b1f8d60b63c89472ccf1d8b4e46948cb793f5d26 (HEAD, tag: v2.0.1, origin/master, origin/HEAD)
+Merge: 6702367 38ad2c8
+Author: gongla <gongliaoan@zsbatech.com>
+Date:   Mon Sep 16 19:52:17 2019 +0800
+
+    Merge branch 'master' into 'master'
+
+2>
+v0.0.0-20190916115217-b1f8d60b63c8
+
+
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+//Mon Sep 16 19:52:17 2019 +0800
+//To UTC
+//v0.0.0-20190916115217-b1f8d60b63c8
+//b1f8d60b63c89472ccf1d8b4e46948cb793f5d26 cut-12
+func main() {
+	oneDay := time.Date(2019, 9, 16, 19, 52, 17, 0, time.Local)
+	fmt.Println(oneDay.String())
+	fmt.Println(oneDay.UTC().String())
+}
+
+/*
+2019-09-16 19:52:17 +0800 CST
+2019-09-16 11:52:17 +0000 UTC
+*/
